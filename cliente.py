@@ -16,7 +16,7 @@ from coapthon.utils import parse_uri
 
 client = None
 
-
+#demonstra as opcoes de utilizacao do scrip cliente
 def usage():  # pragma: no cover
     print "Command:\tcoapclient.py -o -p [-P] [-u]"
     print "Options:"
