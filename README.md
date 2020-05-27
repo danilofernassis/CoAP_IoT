@@ -4,7 +4,7 @@
 ----------------------------------
 
 **Instrução para a execução do código**
-Requisitos:
+*Requisitos:
 - Python 2.7
 - CoAPthon 4.0.2
 - PIP
