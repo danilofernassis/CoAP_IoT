@@ -1,5 +1,8 @@
 # CoaP_IoT
 ![Projeto](figura_1.png)
+
+----------------------------------
+
 Instrução para a execução do código
 Requisitos:
 Python 2.7
@@ -36,3 +39,4 @@ python camada2.py 192.168.1.108 5683
 
 12) Após a finalização da atualização, realizar variação nas barras de temperatura e pressão no SenseHat e verificar a alteração da cor dos LEDs conforme essa variação ultrapasse os limites de temperatura e pressão configurados em cada sensor.
 
+----------------------------------
