@@ -55,7 +55,7 @@ Para isso abra o terminal na pasta desejada e execute o comando:
 
 	```python cliente.py -o OBSERVE -p coap://127.0.0.1:5683/sensor```
 
-8) Variando-se as barras de temperatura e pressão no SenseHat, caso os valores aferidos pelas barras sejam simultaneamente superiores aos valores de temperatura e pressão armazenados no servidor, então a Camada de Aplicação envia comando ao SenseHat para acender todos os LEDs na cor vermelha, caso contrário branco.
+8) Movimentando-se as barras de temperatura e pressão no SenseHat, caso os valores aferidos pelas barras sejam simultaneamente superiores aos valores de temperatura e pressão armazenados no servidor, então a Camada de Aplicação envia comando ao SenseHat para acender todos os LEDs na cor vermelha, caso contrário branco.
 
 [**Vídeo demonstrando a execução do CoAP**](https://youtu.be/pQ872p8E-9Y)
 ----------------------------------

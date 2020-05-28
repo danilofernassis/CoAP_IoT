@@ -24,9 +24,12 @@ def usage():
 def callback(response):
     global client
     print ("Limites atuais no servidor")
-    limites = response.payload.split()
-    print ("Temperatura: {}".format(limites[0]))
-    print ("Pressao: {}".format(limites[1]))
+    if(response.payload):
+        limites = response.payload.split()
+        print ("Temperatura: {}".format(limites[0]))
+        print ("Pressao: {}".format(limites[1]))
+    else:
+        print ("Nao ha lmites armazenados")
     check = True
     while check:
         chosen = raw_input("Continuar a monitorar limites no servidor? [y/N]: ")
