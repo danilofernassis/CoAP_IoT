@@ -9,6 +9,8 @@ from threading import Thread
 
 from sense_emu import SenseHat
 
+# Autor: Danilo Fernandes de Assis
+
 
 client = None
 

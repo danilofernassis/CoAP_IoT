@@ -7,6 +7,7 @@ from coapthon.client.helperclient import HelperClient
 from coapthon.utils import parse_uri
 from coapthon import defines
 
+# Autor: Danilo Fernandes de Assis
 
 client = None
 

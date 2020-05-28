@@ -5,6 +5,8 @@ from coapthon.resources.resource import Resource
 from coapthon import defines
 from threading import Thread
 
+# Autor: Danilo Fernandes de Assis
+
 #definicao da classe sensor e das funcoes de GET e PUT
 class Sensor(Resource):
 
