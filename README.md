@@ -37,5 +37,5 @@ Para isso abra o terminal na pasta desejada e execute o comando:
 
 6) Ao executar o comando para armazenar valores no servidor, será perguntado se deseja "Continuar a monitorar limites no servidor? [y/N]: ". Caso outro cliente venha a alterar os valores armazenados no servidor, se o monitorando estiver ativo, os limites no servidor, ao serem alterados serão informados a todos que estão monitorando para que os mesmos possam parar o monitoramento e enviar novos valores ou continuarem a monitorar caso desejem.
 
-7) Variando as barras de temperatura e pressão no SenseHat, caso os valores aferidos pelas barras sejam simultaneamente superiores aos valores de temperatura e pressão armazenados no servidor, então a Camada de Aplicação envia comando ao SenseHat para acender todos os LEDs na cor vermelha, caso contrário branco.
+7) Variando-se as barras de temperatura e pressão no SenseHat, caso os valores aferidos pelas barras sejam simultaneamente superiores aos valores de temperatura e pressão armazenados no servidor, então a Camada de Aplicação envia comando ao SenseHat para acender todos os LEDs na cor vermelha, caso contrário branco.
 ----------------------------------
