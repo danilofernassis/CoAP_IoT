@@ -2,14 +2,14 @@
 ![Projeto](figura_1.png)
 
 
-* O **Servidor CoAP** é resposável por disponibilizar os recursos aos clientes. Ao ser iniciado, o servidor diponibiliza o recurso "/sensor". Esse recurso armazena os limites de temperatura e pressão que são enviados pelos clientes por meio da operação PUT. O servidor também responde as consultas feitas pelos clientes sobre quais limites estão armazeandos no mesmo. Essa consulta é feita por meio da operação GET.
+* O **Servidor CoAP** é resposável por disponibilizar os recursos aos clientes. Ao ser iniciado, o servidor diponibiliza o recurso "/sensor". Esse recurso armazena os limites de temperatura e pressão que são enviados pelos clientes por meio da operação PUT. O servidor também responde as consultas feitas pelos clientes sobre quais os valores limites estão armazeandos. Essa consulta é feita por meio da operação GET.
 
 * A **Camada de Aplicação** monitora os valores limites de temperatura e pressão armazenados no servidor e também os valores externos aferidos pelo SenseHat por meio das respectivas barras de temperatura e pressão. Qualquer alteração feita nos limites armazeandos no servidor, é informada imediatamente à Camada de Aplicação. A Camada de Aplicação compara os valores armazenados no servidor com os valores externos aferidos pelo SenseHat. Caso os valores de temperatura e pressão do SenseHat sejam simultaneamente superiores aos valores armazenados no servidor, a Camada de Aplicação envia um comando para que todos os LEDs do SenseHat acendam na cor vermelha, caso contrário branco.
 
 * O **Cliente CoAP** é capaz de:
 	- Fazer consultas ao servidor para saber quais valores limites de temperatura e pressão estão armazenados no mesmo. Para isso faz-se uso da operação GET.
 	- Armazenar no servidor limites de temperatura e pressão. Para isso faz-se uso da operação PUT.
-	- Monitorar os limites de temperatura e pressão armazenados no servidor. Caso haja alguma alteração nos limites armazenados os mesmos são informados a todos os clientes que estão monitorando o servidor. Essa função é diponibilizada após o uso da operação PUT e tambem pode ser feita por meio da operação OBSERVE
+	- Monitorar os limites de temperatura e pressão armazenados no servidor. Caso haja alguma alteração nos limites armazenados os mesmos são informados a todos os clientes que estão monitorando o servidor. Essa função é diponibilizada após o uso da operação PUT e tambem pode ser feita por meio da operação OBSERVE.
 
 ----------------------------------
 
