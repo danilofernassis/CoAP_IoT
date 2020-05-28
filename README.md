@@ -15,29 +15,35 @@
 
 # Instrução para a execução do código
 ## Requisitos:
+*	PIP
 *	Python 2.7
 *	CoAPthon 4.0.2
 *	SenseHat Emulator
 
 
-1) Fazer download dos arquivos do Github para a pasta desejada.
+1) Instalar o CoAPthon usando o comando pip:
+
+	```sudo pip install CoAPthon```
+
+
+2) Fazer download dos arquivos do Github para a pasta desejada.
 Para isso abra o terminal na pasta desejada e execute o comando:
 
 	```git clone https://github.com/danilofernassis/CoAP_IoT.git```
 
-2) Apos download entrar no diretorio CoAP_IoT:
+3) Apos download entrar no diretorio CoAP_IoT:
 
 	```cd CoAP_IoT```
 
-3) Iniciar o servidor no IP da maquina e na porta desejada, por exemplo, iniciando o servidor no IP 127.0.0.1 e porta 5683:
+4) Iniciar o servidor no IP da maquina e na porta desejada, por exemplo, iniciando o servidor no IP 127.0.0.1 e porta 5683:
 
 	```python servidor.py 127.0.0.1 5683```
 
-4) Abrir outro terminal, entrar no diretorio entrar no diretorio CoAP_IoT e iniciar a Camada de Aplicação informando o IP e a porta na qual o servidor foi iniciado:
+5) Abrir outro terminal, entrar no diretorio entrar no diretorio CoAP_IoT e iniciar a Camada de Aplicação informando o IP e a porta na qual o servidor foi iniciado:
 
 	```python camada2.py -p coap://127.0.0.1:5683/sensor```
 
-5) Abrir outro terminal, entrar no diretorio CoAP_IoT. O cliente pode verificar qual são os limites armazenados no servidor por meio do comando GET, os valores armazenados são retornados no payload na ordem temperatura primeiro depois pressão:
+6) Abrir outro terminal, entrar no diretorio CoAP_IoT. O cliente pode verificar qual são os limites armazenados no servidor por meio do comando GET, os valores armazenados são retornados no payload na ordem temperatura primeiro depois pressão:
 
 	```python cliente.py -o GET -p coap://127.0.0.1:5683/sensor```
 
@@ -45,9 +51,9 @@ Para isso abra o terminal na pasta desejada e execute o comando:
 
 	```python cliente.py -o PUT -p coap://127.0.0.1:5683/sensor -P "67 847"```
 
-6) Ao executar o comando para armazenar valores no servidor, será perguntado se deseja "Continuar a monitorar limites no servidor? [y/N]: ". Caso outro cliente venha a alterar os valores armazenados no servidor, se o monitorando estiver ativo, os limites no servidor, ao serem alterados serão informados a todos que estão monitorando para que os mesmos possam parar o monitoramento e enviar novos valores ou continuarem a monitorar caso desejem. O monitoramento tambem pode ser ativado por meio da função OBSERVE:
+7) Ao executar o comando para armazenar valores no servidor, será perguntado se deseja "Continuar a monitorar limites no servidor? [y/N]: ". Caso outro cliente venha a alterar os valores armazenados no servidor, se o monitorando estiver ativo, os limites no servidor, ao serem alterados serão informados a todos que estão monitorando para que os mesmos possam parar o monitoramento e enviar novos valores ou continuarem a monitorar caso desejem. O monitoramento tambem pode ser ativado por meio da função OBSERVE:
 
 	```python cliente.py -o OBSERVE -p coap://127.0.0.1:5683/sensor```
 
-7) Variando-se as barras de temperatura e pressão no SenseHat, caso os valores aferidos pelas barras sejam simultaneamente superiores aos valores de temperatura e pressão armazenados no servidor, então a Camada de Aplicação envia comando ao SenseHat para acender todos os LEDs na cor vermelha, caso contrário branco.
+8) Variando-se as barras de temperatura e pressão no SenseHat, caso os valores aferidos pelas barras sejam simultaneamente superiores aos valores de temperatura e pressão armazenados no servidor, então a Camada de Aplicação envia comando ao SenseHat para acender todos os LEDs na cor vermelha, caso contrário branco.
 ----------------------------------
