@@ -65,11 +65,15 @@ client.observe(path, callback)
 #aos valores de temperatura e pressao armazenados no servidor
 #caso isso ocorra, todos os LEDs do sensehat acendem na cor vermelha
 while True:
-    temperatura = sense.temperature
-    pressao = sense.pressure
-    verifica = False
-    if(temperatura > limiar_temp):
-        if(pressao > limiar_pres):
-            verifica = True
-    pixels = [vermelho if verifica else branco for i in range(64)]
-    sense.set_pixels(pixels)
+    try:
+        temperatura = sense.temperature
+        pressao = sense.pressure
+        verifica = False
+        if(temperatura > limiar_temp):
+            if(pressao > limiar_pres):
+                verifica = True
+        pixels = [vermelho if verifica else branco for i in range(64)]
+        sense.set_pixels(pixels)
+    except KeyboardInterrupt:
+        client.close()
+        sys.exit() 
