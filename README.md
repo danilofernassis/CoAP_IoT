@@ -20,9 +20,8 @@
 *	CoAPthon 4.0.2
 *	SenseHat Emulator
 
-----------------------------------
 
-## Execução
+## Execução:
 
 1) Instalar o CoAPthon usando o comando pip:
 
