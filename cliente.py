@@ -5,6 +5,7 @@ import sys
 
 from coapthon.client.helperclient import HelperClient
 from coapthon.utils import parse_uri
+from coapthon import defines
 
 
 client = None

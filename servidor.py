@@ -2,6 +2,7 @@ import sys
 import getopt
 from coapthon.server.coap import CoAP
 from coapthon.resources.resource import Resource
+from coapthon import defines
 from threading import Thread
 
 
