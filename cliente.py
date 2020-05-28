@@ -6,68 +6,49 @@ import sys
 from coapthon.client.helperclient import HelperClient
 from coapthon.utils import parse_uri
 
-# Example of how to run the script
-# To set a value in the path that the sensor.py will read
-# in this case the value will be 20
-# python sensor_simulator.py -o POST -p coap://127.0.0.1:5683/basic -P 20
-
-# python sensor_simulator.py -o GET -p coap://127.0.0.1:5683/basic
-
 
 client = None
 
-#demonstra as opcoes de utilizacao do scrip cliente
-def usage():  # pragma: no cover
-    print "Command:\tcoapclient.py -o -p [-P] [-u]"
+
+def usage():
+    print "Command:\tpython cliente_v2.py -o -p [-P]"
     print "Options:"
     print "\t-o, --operation=\tGET|PUT|POST|DELETE|DISCOVER|OBSERVE"
     print "\t-p, --path=\t\tPath of the request"
     print "\t-P, --payload=\t\tPayload of the request"
-    print "\t-f, --payload-file=\tFile with payload of the request"
-    print "\t-u, --proxy-uri-header=\tProxy-Uri CoAP Header of the request"
 
 
-def client_callback(response):
-    print "Callback"
-
-
-def client_callback_observe(response):  # pragma: no cover
+def callback(response):
     global client
-    print "Callback_observe"
+    print ("Limites atuais no servidor")
+    limites = response.payload.split()
+    print ("Temperatura: {}".format(limites[0]))
+    print ("Pressao: {}".format(limites[1]))
     check = True
     while check:
-        chosen = raw_input("Stop observing? [y/N]: ")
+        chosen = raw_input("Continuar a monitorar limites no servidor? [y/N]: ")
+        print ("------------------------")
         if chosen != "" and not (chosen == "n" or chosen == "N" or chosen == "y" or chosen == "Y"):
-            print "Unrecognized choose."
+            print "Escolha nao reconhecida."
             continue
-        elif chosen == "y" or chosen == "Y":
+        elif chosen == "n" or chosen == "N":
             while True:
-                rst = raw_input("Send RST message? [Y/n]: ")
-                if rst != "" and not (rst == "n" or rst == "N" or rst == "y" or rst == "Y"):
-                    print "Unrecognized choose."
-                    continue
-                elif rst == "" or rst == "y" or rst == "Y":
-                    client.cancel_observing(response, True)
-                else:
-                    client.cancel_observing(response, False)
+                client.cancel_observing(response, True)
                 check = False
                 break
         else:
             break
 
 
-def main():  # pragma: no cover
+def main():  
     global client
     op = None
     path = None
     payload = None
-    proxy_uri = None
     try:
-        opts, args = getopt.getopt(sys.argv[1:], "ho:p:P:f:", ["help", "operation=", "path=", "payload=",
-                                                               "payload_file=", "proxy-uri-header="])
+        opts, args = getopt.getopt(sys.argv[1:], "ho:p:P:f:", ["help", "operation=", "path=", "payload="])
     except getopt.GetoptError as err:
-        # print help information and exit:
-        print str(err)  # will print something like "option -a not recognized"
+        print str(err)  
         usage()
         sys.exit(2)
     for o, a in opts:
@@ -77,11 +58,6 @@ def main():  # pragma: no cover
             path = a
         elif o in ("-P", "--payload"):
             payload = a
-        elif o in ("-f", "--payload-file"):
-            with open(a, 'r') as f:
-                payload = f.read()
-        elif o in ("-u", "--proxy-uri-header"):
-            proxy_uri = a
         elif o in ("-h", "--help"):
             usage()
             sys.exit()
@@ -90,22 +66,17 @@ def main():  # pragma: no cover
             sys.exit(2)
 
     if op is None:
-        print "Operation must be specified"
+        print "Operacao deve ser especificada"
         usage()
         sys.exit(2)
 
     if path is None:
-        print "Path must be specified"
+        print "Caminho deve ser especificado"
         usage()
         sys.exit(2)
 
     if not path.startswith("coap://"):
-        print "Path must be conform to coap://host[:port]/path"
-        usage()
-        sys.exit(2)
-
-    if proxy_uri and not proxy_uri.startswith("http://") and not proxy_uri.startswith("https://"):
-        print "Proxy-Uri header must be conform to http[s]://host[:port]/path"
+        print "Caminho deve ser do tipo coap://host[:port]/path"
         usage()
         sys.exit(2)
 
@@ -118,37 +89,33 @@ def main():  # pragma: no cover
     client = HelperClient(server=(host, port))
     if op == "GET":
         if path is None:
-            print "Path cannot be empty for a GET request"
+            print "Caminho nao pode ser vazio"
             usage()
             sys.exit(2)
-        print path
-        print host
-        print port
         response = client.get(path)
         print response.pretty_print()
         client.stop()
     elif op == "OBSERVE":
         if path is None:
-            print "Path cannot be empty for a GET request"
+            print "Caminho nao pode ser vazio"
             usage()
             sys.exit(2)
-        client.observe(path, client_callback_observe)
-        
+        client.observe(path, callback)    
     elif op == "DELETE":
         if path is None:
-            print "Path cannot be empty for a DELETE request"
+            print "Caminho nao pode ser vazio"
             usage()
             sys.exit(2)
-        response = client.delete(path, proxy_uri=proxy_uri)
+        response = client.delete(path)
         print response.pretty_print()
         client.stop()
     elif op == "POST":
         if path is None:
-            print "Path cannot be empty for a POST request"
+            print "Caminho nao pode ser vazio"
             usage()
             sys.exit(2)
         if payload is None:
-            print "Payload cannot be empty for a POST request"
+            print "Payload nao pode ser vazio"
             usage()
             sys.exit(2)
         response = client.post(path, payload)
@@ -156,25 +123,21 @@ def main():  # pragma: no cover
         client.stop()
     elif op == "PUT":
         if path is None:
-            print "Path cannot be empty for a PUT request"
+            print "Caminho nao pode ser vazio"
             usage()
             sys.exit(2)
         if payload is None:
-            print "Payload cannot be empty for a PUT request"
+            print "Payload nao pode ser vazio"
             usage()
             sys.exit(2)
-        response = client.put(path, payload, proxy_uri=proxy_uri)
+        response = client.put(path, payload)
         print response.pretty_print()
-        client.stop()
-    elif op == "DISCOVER":
-        response = client.discover()
-        print response.pretty_print()
-        client.stop()
+        client.observe(path, callback)
     else:
-        print "Operation not recognized"
+        print "Operacao nao reconhecida"
         usage()
         sys.exit(2)
 
 
-if __name__ == '__main__':  # pragma: no cover
+if __name__ == '__main__':
     main()
