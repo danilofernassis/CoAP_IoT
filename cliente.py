@@ -10,15 +10,16 @@ from coapthon import defines
 
 client = None
 
-
+#imprime como usar os comandos do arquivo cliente.py
 def usage():
-    print "Command:\tpython cliente_v2.py -o -p [-P]"
+    print "Command:\tpython cliente.py -o -p [-P]"
     print "Options:"
     print "\t-o, --operation=\tGET|PUT|OBSERVE"
     print "\t-p, --path=\t\tPath of the request"
     print "\t-P, --payload=\t\tPayload of the request"
 
 
+#funcao para monitorar o servidor caso haja alteracao nos valores limites de temperatura e pressao armazenados no mesmo
 def callback(response):
     global client
     print ("Limites atuais no servidor")
@@ -40,12 +41,14 @@ def callback(response):
         else:
             break
 
-
+#funcao principal
 def main():  
     global client
     op = None
     path = None
     payload = None
+
+    #verifica se todos os argumentos passados estao corretos
     try:
         opts, args = getopt.getopt(sys.argv[1:], "ho:p:P:f:", ["help", "operation=", "path=", "payload="])
     except getopt.GetoptError as err:
@@ -65,7 +68,6 @@ def main():
         else:
             usage()
             sys.exit(2)
-
     if op is None:
         print "Operacao deve ser especificada"
         usage()
@@ -81,6 +83,7 @@ def main():
         usage()
         sys.exit(2)
 
+    #separa host, porta e path do argumento passado no comando    
     host, port, path = parse_uri(path)
     try:
         tmp = socket.gethostbyname(host)
@@ -88,6 +91,8 @@ def main():
     except socket.gaierror:
         pass
     client = HelperClient(server=(host, port))
+
+    #verifica qual foi a operacao passada no comando e a executa
     if op == "GET":
         if path is None:
             print "Caminho nao pode ser vazio"

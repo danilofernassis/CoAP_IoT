@@ -7,19 +7,23 @@ from coapthon.utils import parse_uri
 from coapthon import defines
 from threading import Thread
 
-#from sense_emu import SenseHat
+from sense_emu import SenseHat
+
 
 client = None
 
 #cria o emulador sensehat e defini as cores
-#sense = SenseHat()
+sense = SenseHat()
+vermelho = (255, 0, 0)
+branco = (255, 255, 255)
+pixels = [None]*64
 
-#vermelho = (255, 0, 0)
-#branco = (255, 255, 255)
-#pixels = [None]*64
+#variaveis usadas para compara com os valores de temperatura e pressao medidos no sensehat
+#sao iniciadas com valores altos a fim de deixar os LEDs na cor branca caso nao haja nenhum limite armazenado no servidor
 limiar_pres = 2000
 limiar_temp = 2000
 
+#separa host, porta e path passados no argumento do comando
 path = sys.argv[2]
 host, port, path = parse_uri(path)
 try:
@@ -28,6 +32,7 @@ try:
 except socket.gaierror:
     pass
 
+#verifica se ha valores limites armazenados no servidor
 client = HelperClient(server=(host, port))
 resposta = client.get(path)
 if(resposta.payload):
@@ -36,6 +41,7 @@ if(resposta.payload):
     limiar_pres = float(limites[1])
     
 
+#funcao para monitorar o servidor caso haja alguma alteracao de valor nos limites armazenados no mesmo
 def callback(response):
     global client
     global limiar_temp
@@ -52,11 +58,12 @@ def callback(response):
         print ("Nao ha limites configurados")
     print ("------------------------")
 
-#captura os argumentos passados no comando de execucao (ip, porta)
-
+#executa a funcao de monitoramento do s
 client.observe(path, callback)
-'''
-#loop para analisar os valores das referidas posicoes dos vetores; caso valores dos vetores estejam abaixo do valor presente nas referidas barras do sensehat, aciona-se a cor vermelha no referido LED
+
+#loop para verificar se os valores de temperatura e pressao sao ambos superiores 
+#aos valores de temperatura e pressao armazenados no servidor
+#caso isso ocorra, todos os LEDs do sensehat acendem na cor vermelha
 while True:
     temperatura = sense.temperature
     pressao = sense.pressure
@@ -65,4 +72,4 @@ while True:
         if(pressao > limiar_pres):
             verifica = True
     pixels = [vermelho if verifica else branco for i in range(64)]
-    sense.set_pixels(pixels) '''
+    sense.set_pixels(pixels)
