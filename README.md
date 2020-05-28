@@ -13,27 +13,27 @@
 1) Fazer download dos arquivos do Github para a pasta desejada.
 Para isso abra o terminal na pasta desejada e execute o comando:
 
-```git clone https://github.com/danilofernassis/CoAP_IoT.git```
+	```git clone https://github.com/danilofernassis/CoAP_IoT.git```
 
 2) Apos download entrar no diretorio CoAP_IoT:
 
-```cd CoAP_IoT```
+	```cd CoAP_IoT```
 
 3) Iniciar o servidor no ip da maquina e na porta desejado, por exemplo, iniciando o servidor no ip 127.0.0.1 e porta 5683:
 
-```python servidor.py 127.0.0.1 5683```
+	```python servidor.py 127.0.0.1 5683```
 
-4) Abrir outro terminal, entrar no diretorio entrar no diretorio CoAP_IoT e iniciar a Camada de Aplicação informando o ip e porta o qual o servidor foi iniciado e o sensor a ser monitorado:
+4) Abrir outro terminal, entrar no diretorio entrar no diretorio CoAP_IoT e iniciar a Camada de Aplicação informando o ip e porta o qual o servidor foi iniciado:
 
-```python camada2.py -p coap://127.0.0.1:5683/sensor```
+	```python camada2.py -p coap://127.0.0.1:5683/sensor```
 
 5) Abrir outro terminal, entrar no diretorio CoAP_IoT para iniciar o cliente. O cliente pode verificar qual são os limites armazenados no servidor por meio do comando GET:
 
-```python cliente.py -o GET -p coap://127.0.0.1:5683/sensor```
+	```python cliente.py -o GET -p coap://127.0.0.1:5683/sensor```
 
-e também pode armazenar no servidor limites de temperatura e pressão desejados por meio do comando PUT. Por exemplo, caso deseje armazenar uma temperatura de 67ºC e uma pressão de 847mbar, então (atenção a ordem, temperatura primeiro depois pressão entre aspas duplas):
+	e também pode armazenar no servidor limites de temperatura e pressão desejados por meio do comando PUT. Por exemplo, caso deseje armazenar uma temperatura de 67ºC e uma pressão de 847mbar, então (atenção a ordem, temperatura primeiro depois pressão entre aspas duplas):
 
-```python cliente.py -o PUT -p coap://127.0.0.1:5683/sensor -P "67 847"```
+	```python cliente.py -o PUT -p coap://127.0.0.1:5683/sensor -P "67 847"```
 
 
 ----------------------------------
