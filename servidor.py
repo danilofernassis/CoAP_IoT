@@ -21,13 +21,6 @@ class Sensor(Resource):
         self.edit_resource(request)
         return self
 
-    def render_POST(self, request):
-        seres = self.init_resource(request, Sensor())
-        return seres
-
-    def render_DELETE(self, request):
-        return True
-
 class CoAPServer(CoAP):
     def __init__(self, host, port, multicast=False):
         CoAP.__init__(self,(host,port),multicast)

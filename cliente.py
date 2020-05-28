@@ -13,7 +13,7 @@ client = None
 def usage():
     print "Command:\tpython cliente_v2.py -o -p [-P]"
     print "Options:"
-    print "\t-o, --operation=\tGET|PUT|POST|DELETE|DISCOVER|OBSERVE"
+    print "\t-o, --operation=\tGET|PUT|OBSERVE"
     print "\t-p, --path=\t\tPath of the request"
     print "\t-P, --payload=\t\tPayload of the request"
 
@@ -76,7 +76,7 @@ def main():
         sys.exit(2)
 
     if not path.startswith("coap://"):
-        print "Caminho deve ser do tipo coap://host[:port]/path"
+        print "Caminho deve ser do tipo coap://host:port/path"
         usage()
         sys.exit(2)
 
@@ -101,26 +101,6 @@ def main():
             usage()
             sys.exit(2)
         client.observe(path, callback)    
-    elif op == "DELETE":
-        if path is None:
-            print "Caminho nao pode ser vazio"
-            usage()
-            sys.exit(2)
-        response = client.delete(path)
-        print response.pretty_print()
-        client.stop()
-    elif op == "POST":
-        if path is None:
-            print "Caminho nao pode ser vazio"
-            usage()
-            sys.exit(2)
-        if payload is None:
-            print "Payload nao pode ser vazio"
-            usage()
-            sys.exit(2)
-        response = client.post(path, payload)
-        print response.pretty_print()
-        client.stop()
     elif op == "PUT":
         if path is None:
             print "Caminho nao pode ser vazio"
