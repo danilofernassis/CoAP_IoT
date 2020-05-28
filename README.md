@@ -14,6 +14,8 @@
 ----------------------------------
 
 # Instrução para a execução do código
+(Link para o vídeo demonstrando a execução está no final da página)
+
 ## Requisitos:
 *	PIP
 *	Python 2.7
