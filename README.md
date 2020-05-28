@@ -3,8 +3,8 @@
 
 ----------------------------------
 
-**Instrução para a execução do código**
-### Requisitos:
+###Instrução para a execução do código
+## Requisitos:
 *	Python 2.7
 *	CoAPthon 4.0.2
 
