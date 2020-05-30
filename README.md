@@ -2,9 +2,9 @@
 ![Projeto](figura_1.png)
 
 * O **Cliente CoAP** possui as seguintes funcionalidades:
-	- Fazer consultas ao servidor para saber quais valores limites de temperatura e pressão lá estão armazenados. Para isso faz-se uso da operação GET.
-	- Armazenar no servidor limites de temperatura e pressão. Para isso faz-se uso da operação PUT.
-	- Monitorar os limites de temperatura e pressão armazenados no servidor. Caso haja alguma alteração nos limites armazenados os mesmos são informados a todos os clientes que estão monitorando o servidor. Essa função é diponibilizada após o uso da operação PUT e tambem pode ser feita por meio da operação OBSERVE.
+	- Faz consultas ao servidor para saber quais valores limites de temperatura e pressão lá estão armazenados. Para isso faz-se uso da operação GET.
+	- Armazena no servidor limites de temperatura e pressão. Para isso faz-se uso da operação PUT.
+	- Monitora os limites de temperatura e pressão armazenados no servidor. Caso haja alguma alteração nos limites armazenados os mesmos são informados a todos os clientes que estão monitorando o servidor. Essa função é diponibilizada após o uso da operação PUT e tambem pode ser feita por meio da operação OBSERVE.
 
 * O **Servidor CoAP** é resposável por disponibilizar os recursos aos clientes. Ao ser iniciado, o servidor diponibiliza o recurso "/sensor". Esse recurso armazena os limites de temperatura e pressão que são enviados pelos clientes por meio da operação PUT. O servidor também responde as consultas feitas pelos clientes sobre quais os valores limites estão armazeandos. Essa consulta é feita por meio da operação GET.
 
@@ -60,5 +60,6 @@ Para isso abra o terminal na pasta desejada e execute o comando:
 
 8) Movimentando-se as barras de temperatura e pressão no SenseHat, caso os valores aferidos pelas barras sejam simultaneamente superiores aos valores de temperatura e pressão armazenados no servidor, então a Camada de Aplicação envia comando ao SenseHat para acender todos os LEDs na cor vermelha, caso contrário branco.
 
-[**Vídeo demonstrando a execução do CoAP**](https://youtu.be/pQ872p8E-9Y){:target="_blank"}
+[**Vídeo demonstrando a execução do CoAP**](https://youtu.be/pQ872p8E-9Y){:target="_blank_"}
+<a href="http://example.com/" target="_blank">Hello, world!</a>
 ----------------------------------
