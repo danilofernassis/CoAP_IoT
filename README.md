@@ -60,6 +60,5 @@ Para isso abra o terminal na pasta desejada e execute o comando:
 
 8) Movimentando-se as barras de temperatura e pressão no SenseHat, caso os valores aferidos pelas barras sejam simultaneamente superiores aos valores de temperatura e pressão armazenados no servidor, então a Camada de Aplicação envia comando ao SenseHat para acender todos os LEDs na cor vermelha, caso contrário branco.
 
-[**Vídeo demonstrando a execução do CoAP**](https://youtu.be/pQ872p8E-9Y){:target="_blank_"}
-<a href="http://example.com/" target="_blank">Hello, world!</a>
+[**Vídeo demonstrando a execução do CoAP**](https://youtu.be/pQ872p8E-9Y)
 ----------------------------------
