@@ -32,12 +32,13 @@ class CoAPServer(CoAP):
         print "CoAP server started on {}:{}".format(str(host),str(port))
         print self.root.dump()
 
-
+#principal
 def main():
     ip = sys.argv[1] #ip servidor
     port = int(sys.argv[2]) #porta
     multicast=False
 
+    #criacao do CoaPServer
     server = CoAPServer(ip,port,multicast)
 
     try:

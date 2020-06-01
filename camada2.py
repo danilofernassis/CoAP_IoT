@@ -44,7 +44,7 @@ if(resposta.payload):
     limiar_pres = float(limites[1])
     
 
-#funcao para monitorar o servidor caso haja alguma alteracao de valor nos limites armazenados no mesmo
+#funcao a ser executada caso seja verificado alteracao nos limites monitorados no servidor 
 def callback(response):
     global client
     global limiar_temp
@@ -61,7 +61,7 @@ def callback(response):
         print ("Nao ha limites configurados")
     print ("------------------------")
 
-#executa a funcao de monitoramento do s
+#executa o monitoramento dos valores limites no servidor
 client.observe(path, callback)
 
 #loop para verificar se os valores de temperatura e pressao sao ambos superiores 
