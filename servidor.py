@@ -24,7 +24,7 @@ class Sensor(Resource):
         self.edit_resource(request)
         return self
 
-#definicao da classe CoAPServe com a alocacao do recurso sensor
+#definicao da classe CoAPServe
 class CoAPServer(CoAP):
     def __init__(self, host, port, multicast=False):
         CoAP.__init__(self,(host,port),multicast)
@@ -32,10 +32,10 @@ class CoAPServer(CoAP):
         print "CoAP server started on {}:{}".format(str(host),str(port))
         print self.root.dump()
 
-#principal
+#funcao principal
 def main():
     ip = sys.argv[1] #ip servidor
-    port = int(sys.argv[2]) #porta
+    port = int(sys.argv[2]) #porta servidor
     multicast=False
 
     #criacao do CoaPServer

@@ -20,7 +20,7 @@ def usage():
     print "\t-P, --payload=\t\tPayload of the request"
 
 
-#funcao para monitorar o servidor caso haja alteracao nos valores limites de temperatura e pressao armazenados no mesmo
+#funcao a ser executada caso haja alteracao nos valores limites de temperatura e pressao armazenados no mesmo
 def callback(response):
     global client
     print ("Limites atuais no servidor")
@@ -97,7 +97,7 @@ def main():
     client = HelperClient(server=(host, port))
 
     #verifica qual foi a operacao passada no comando e a executa
-    if op == "GET":
+    if op == "GET": #faz requisao para verificar quais limites estao armazenados no servidor
         if path is None:
             print "Caminho nao pode ser vazio"
             usage()
@@ -105,13 +105,13 @@ def main():
         response = client.get(path)
         print response.pretty_print()
         client.stop()
-    elif op == "OBSERVE":
+    elif op == "OBSERVE": #faz o monitoramento dos limites armazenados no servidor
         if path is None:
             print "Caminho nao pode ser vazio"
             usage()
             sys.exit(2)
         client.observe(path, callback)    
-    elif op == "PUT":
+    elif op == "PUT": #armazena limites no servidor
         if path is None:
             print "Caminho nao pode ser vazio"
             usage()
