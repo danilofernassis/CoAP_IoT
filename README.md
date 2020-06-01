@@ -42,7 +42,7 @@ Para isso abra o terminal na pasta desejada e execute o comando:
 
 	```python servidor.py 127.0.0.1 5683```
 
-5) Abrir outro terminal, entrar no diretorio entrar no diretorio CoAP_IoT e iniciar a Camada de Aplicação informando o IP e a porta na qual o servidor foi iniciado:
+5) Abrir outro terminal, entrar no diretorio entrar no diretorio CoAP_IoT e iniciar a Camada de Aplicação informando o IP e a porta na qual o servidor foi iniciado e por fim o sensor (/sensor):
 
 	```python camada2.py -p coap://127.0.0.1:5683/sensor```
 
